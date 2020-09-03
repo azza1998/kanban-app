@@ -23,14 +23,16 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Braian
  *
  */
 @Service
+@Slf4j
 public class KanbanBoardService {
 	
-	private final static Logger logger = LoggerFactory.getLogger(KanbanBoard.class);
 	private final KanbanBoardRepository kanbanBoardRepository;	
 	private final UserRepository userRepository;	
 	private final MongoOperations mongoOperations;	
@@ -48,7 +50,7 @@ public class KanbanBoardService {
 	public KanbanBoard saveBoard(NameRequest name) {
 		KanbanBoard board = new KanbanBoard();
 		board.setName(name.getName());
-		logger.info("Board Saved Successfully");
+		log.info("Board Saved Successfully");
 		return this.kanbanBoardRepository.save(board);
 	}
 
@@ -57,15 +59,15 @@ public class KanbanBoardService {
 				.map(board -> this.isOwner(board, currentUser)).ifPresentOrElse(board -> {				
 					Query query = new Query(Criteria.where("idBoard").is(board.getId()));
 					this.mongoOperations.findAllAndRemove(query, "attachments");
-					logger.info("Attachments Deleted Successfully");
+					log.info("Attachments Deleted Successfully");
 					this.mongoOperations.findAllAndRemove(query, "cards");
-					logger.info("Cards Deleted Successfully");
+					log.info("Cards Deleted Successfully");
 					this.mongoOperations.findAllAndRemove(query, "columns");
-					logger.info("Columns Deleted Successfully");
+					log.info("Columns Deleted Successfully");
 			this.kanbanBoardRepository.deleteById(id);
-			logger.info("Board Deleted Successfully",board.getId());
+			log.info("Board Deleted Successfully",board.getId());
 		}, () -> {
-			logger.error("Board cannot be deleted");
+			log.error("Board cannot be deleted");
 			throw new RuntimeException("Board cannot be deleted");
 		});
 	}

@@ -4,12 +4,25 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
+import org.bson.types.ObjectId;
+import org.spring.kanban.payload.CoverDetail;
 import org.springframework.data.annotation.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Braian
  *
  */
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public abstract class BaseEntity<U> extends DateAudit<String> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,29 +33,9 @@ public abstract class BaseEntity<U> extends DateAudit<String> implements Seriali
 	@NotBlank
 	private String name;
 
-	public U getId() {
-		return id;
-	}
-
-	public void setId(U id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public BaseEntity(String name) {
 		super();
 		this.name = name;
-	}
-
-	public BaseEntity() {
-		super();
 	}
 
 }

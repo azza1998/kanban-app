@@ -9,6 +9,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Braian
  *
@@ -17,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 		value = { "createdBy", "createdDate",
 				"updatedBy", "updatedDate" },
 		allowGetters = true)
+@Getter @Setter
 public abstract class DateAudit<U> {
 
 	@CreatedBy
@@ -30,36 +34,4 @@ public abstract class DateAudit<U> {
 
 	@LastModifiedDate
 	private Instant updatedDate;
-
-	public U getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(U createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Instant getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Instant createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public U getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(U updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public Instant getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(Instant updatedDate) {
-		this.updatedDate = updatedDate;
-	}
 }

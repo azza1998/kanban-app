@@ -1,9 +1,13 @@
 package org.spring.kanban.exception;
 
+import lombok.Getter;
+import lombok.Value;
+
 /**
  * @author Braian
  *
  */
+@Getter
 public class EntityNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
@@ -18,17 +22,4 @@ public class EntityNotFoundException extends RuntimeException {
 		this.fieldName = fieldName;
 		this.fieldValue = fieldValue;
 	}
-
-	public String getEntityName() {
-		return entityName;
-	}
-
-	public String getFieldName() {
-		return fieldName;
-	}
-
-	public Object getFieldValue() {
-		return fieldValue;
-	}
-
 }

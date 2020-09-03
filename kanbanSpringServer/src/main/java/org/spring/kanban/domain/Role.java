@@ -1,26 +1,19 @@
 package org.spring.kanban.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * @author Braian
  *
  */
+@Setter @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
 
 	private RoleName name;
-
-	public Role(RoleName name) {
-		this.name = name;
-	}
-
-	public Role() {
-	}
-
-	public RoleName getRoleName() {
-		return name;
-	}
-
-	public void setRoleName(RoleName name) {
-		this.name = name;
-	}
 
 }

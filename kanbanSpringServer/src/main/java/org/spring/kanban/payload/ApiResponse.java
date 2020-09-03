@@ -1,9 +1,15 @@
 package org.spring.kanban.payload;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Braian
  *
  */
+@Getter @Setter
+@AllArgsConstructor
 public abstract class ApiResponse {
 	private Boolean success;
 	private String message;
@@ -14,22 +20,6 @@ public abstract class ApiResponse {
 
 	public void addMessage(String message) {
 		this.setMessage(message);
-	}
-
-	public Boolean getSuccess() {
-		return success;
-	}
-
-	public void setSuccess(Boolean success) {
-		this.success = success;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 }

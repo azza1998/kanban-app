@@ -17,15 +17,16 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Braian
  *
  */
 
 @RestControllerAdvice
+@Slf4j
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-
-	private final static Logger logger = LoggerFactory.getLogger(CustomGlobalExceptionHandler.class);
 
 	/*
 	 * Error handle for invalid parameter for @ID
@@ -34,7 +35,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	@Override
 	protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
-		logger.error("Failed to convert parameter {} ", ex.getMessage());
+		log.error("Failed to convert parameter {} ", ex.getMessage());
 		return buildResponseEntity(new ErrorResponse(HttpStatus.BAD_REQUEST,
 				"Failed to convert parameter {id=" + ex.getValue() + "} to ObjectId", ex.getLocalizedMessage()));
 	}

@@ -1,24 +1,28 @@
 package org.spring.kanban.payload;
 
 import java.time.Instant;
+import java.util.Set;
 
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
+import org.spring.kanban.domain.Role;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Braian
  *
  */
+@Getter @Setter
+@AllArgsConstructor
 public class AttachmentDetails extends BaseResponse {
 
 	private Binary file;
 	private String contentType;
 	private ObjectId idCard;
 	private ObjectId idBoard;
-
-	public AttachmentDetails() {
-		super();
-	}
 
 	public AttachmentDetails(ObjectId id, String name, String createdBy, Instant createdDate, String updatedBy,
 			Instant updatedDate, Binary file, String contentType, ObjectId idCard, ObjectId idBoard) {
@@ -28,37 +32,4 @@ public class AttachmentDetails extends BaseResponse {
 		this.idCard = idCard;
 		this.idBoard = idBoard;
 	}
-
-	public Binary getFile() {
-		return file;
-	}
-
-	public void setFile(Binary file) {
-		this.file = file;
-	}
-
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-	public ObjectId getIdCard() {
-		return idCard;
-	}
-
-	public void setIdCard(ObjectId idCard) {
-		this.idCard = idCard;
-	}
-
-	public ObjectId getIdBoard() {
-		return idBoard;
-	}
-
-	public void setIdBoard(ObjectId idBoard) {
-		this.idBoard = idBoard;
-	}
-
 }

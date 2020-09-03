@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spring.kanban.exception.CustomGlobalExceptionHandler;
 import org.spring.kanban.exception.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -20,20 +21,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Braian
  *
  */
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@Slf4j
 public class AuthenticationEntryPointJwt implements AuthenticationEntryPoint {
-
-	private static final Logger logger = LoggerFactory.getLogger(AuthenticationEntryPoint.class);
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
-		logger.error("Unauthorized error: {}", authException.getMessage());
+		log.error("Unauthorized error: {}", authException.getMessage());
 		response.setContentType("application/json");
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.getWriter().write((new ObjectMapper().writeValueAsString(new ErrorResponse(HttpStatus.UNAUTHORIZED,
@@ -43,7 +45,7 @@ public class AuthenticationEntryPointJwt implements AuthenticationEntryPoint {
 	@ExceptionHandler(AccessDeniedException.class)
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
-		logger.error("Unauthorized error: {}", accessDeniedException.getMessage());
+		log.error("Unauthorized error: {}", accessDeniedException.getMessage());
 		response.setContentType("application/json");
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.getWriter().write((new ObjectMapper().writeValueAsString(new ErrorResponse(HttpStatus.UNAUTHORIZED,

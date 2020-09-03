@@ -30,14 +30,16 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Braian
  *
  */
 @Service
+@Slf4j
 public class KanbanCardService {
 
-	private final static Logger logger = LoggerFactory.getLogger(KanbanCardService.class);
 	private final KanbanCardRepository kanbanCardRepository;
 	private final KanbanColumnRepository kanbanColumnRepository;
 	private final MongoOperations mongoOperations;
@@ -75,7 +77,7 @@ public class KanbanCardService {
 		kanbanCard.setIdColumn(kanbanColumn.getId());
 		kanbanCard.setIdBoard(kanbanColumn.getIdBoard());
 		kanbanCard.setPosition(countPositionByIdColumn);
-		logger.info("Card Saved Successfully");
+		log.info("Card Saved Successfully");
 		return this.kanbanCardRepository.save(kanbanCard);
 	}
 
@@ -84,12 +86,12 @@ public class KanbanCardService {
 				.ifPresentOrElse(kanbanCard -> {
 					Query query = new Query(Criteria.where("idBoard").is(kanbanCard.getIdBoard()));
 					this.mongoOperations.findAllAndRemove(query, "attachments");
-					logger.info("Attachments Deleted Successfully");
+					log.info("Attachments Deleted Successfully");
 					this.positionService.deleteADocumentByIdAndDecreaseAllPositionsGreaterThanCurrentPosition(
 							kanbanCard.getIdColumn(), kanbanCard.getPosition(), kanbanCard);
-					logger.info("Card Deleted Successfully");
+					log.info("Card Deleted Successfully");
 				}, () -> {
-					logger.error("Card cannot be deleted");
+					log.error("Card cannot be deleted");
 					throw new RuntimeException("Card cannot be deleted");
 				});
 	}
@@ -109,14 +111,14 @@ public class KanbanCardService {
 	public KanbanCard updateName(ObjectId id, NameRequest name, UserPrincipal currentUser) {
 		KanbanCard card = this.findById(id, currentUser);
 		card.setName(name.getName());
-		logger.info("Name Updated Successfully");
+		log.info("Name Updated Successfully");
 		return this.kanbanCardRepository.save(card);
 	}
 
 	public KanbanCard updateDescription(ObjectId id, DescriptionRequest description, UserPrincipal currentUser) {
 		KanbanCard card = this.findById(id, currentUser);
 		card.setDescription(description.getDescription());
-		logger.info("Description Updated Successfully");
+		log.info("Description Updated Successfully");
 		return this.kanbanCardRepository.save(card);
 	}
 
@@ -141,7 +143,7 @@ public class KanbanCardService {
 				}
 				if (coverDetail.getIdAttachment() != null) {
 					kanbanCard.setCover(coverDetail);
-					logger.info("Attachments Updated Successfully");
+					log.info("Attachments Updated Successfully");
 					this.kanbanCardRepository.save(kanbanCard);
 				}
 			}
@@ -178,7 +180,7 @@ public class KanbanCardService {
 			card.setCover(coverDetail);
 			this.kanbanCardRepository.save(card);
 		} else {
-			logger.error("Cover is not a JPEG,PNG or JPG");
+			log.error("Cover is not a JPEG,PNG or JPG");
 			throw new RuntimeException("Cover is not a JPEG,PNG or JPG");
 		}
 		return card;
@@ -192,7 +194,7 @@ public class KanbanCardService {
 			card.setCover(null);
 			return this.kanbanCardRepository.save(card);
 		} else {
-			logger.error("This is not current Cover");
+			log.error("This is not current Cover");
 			throw new RuntimeException("This is not current Cover");
 		}
 	}

@@ -7,8 +7,6 @@ import java.util.Set;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spring.kanban.configuration.UserPrincipal;
 import org.spring.kanban.domain.Role;
 import org.spring.kanban.domain.RoleName;
@@ -30,16 +28,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Braian
  *
  */
 @Service
+@Slf4j
 public class UserService {
 
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
-	private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
@@ -99,7 +99,7 @@ public class UserService {
 			roles.add(userRole);
 		} else {
 			roles.forEach(role -> {
-				switch (role.getRoleName()) {
+				switch (role.getName()) {
 				case ROLE_ADMIN:
 					Role adminRole = new Role(RoleName.ROLE_ADMIN);
 					roles.add(adminRole);
@@ -114,7 +114,7 @@ public class UserService {
 		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
 				passwordEncoder.encode(signUpRequest.getPassword()), signUpRequest.getEmail());
 		user.setRoles(roles);
-		logger.info("User Saved Successfully");
+		log.info("User Saved Successfully");
 		return this.userRepository.save(user);
 	}
 
@@ -123,11 +123,11 @@ public class UserService {
 		for (GrantedAuthority role : currentUser.getAuthorities()) {
 			if (role.getAuthority().equalsIgnoreCase("ROLE_ADMIN")
 					|| role.getAuthority().equalsIgnoreCase("ROLE_USER") && currentUser.getId().equals(id)) {
-				logger.info("User Deleted Successfully");
+				log.info("User Deleted Successfully");
 				this.userRepository.deleteById(id);
 				break;
 			} else {
-				logger.error("This ID cannot be deleted");
+				log.error("This ID cannot be deleted");
 				throw new RuntimeException("This ID cannot be deleted");
 			}
 		}

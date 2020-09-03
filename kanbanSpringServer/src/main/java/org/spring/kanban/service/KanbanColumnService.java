@@ -17,14 +17,16 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Braian
  *
  */
 @Service
+@Slf4j
 public class KanbanColumnService {
 
-	private final static Logger logger = LoggerFactory.getLogger(KanbanColumnService.class);
 	private final KanbanColumnRepository kanbanColumnRepository;
 	private final KanbanBoardRepository kanbanBoardRepository;
 	private final MongoOperations mongoOperations;
@@ -54,7 +56,7 @@ public class KanbanColumnService {
 		kanbanColumn.setName(name.getName());
 		kanbanColumn.setIdBoard(kanbanBoard.getId());
 		kanbanColumn.setPosition(positionCountByIdColumn);
-		logger.info("Column Saved Successfully");
+		log.info("Column Saved Successfully");
 		return this.kanbanColumnRepository.save(kanbanColumn);
 	}
 
@@ -63,14 +65,14 @@ public class KanbanColumnService {
 				.ifPresentOrElse(kanbanColumn -> {
 					Query query = new Query(Criteria.where("idBoard").is(kanbanColumn.getIdBoard()));
 					this.mongoOperations.findAllAndRemove(query, "attachments");
-					logger.info("Attachments Deleted Successfully");
+					log.info("Attachments Deleted Successfully");
 					this.mongoOperations.findAllAndRemove(query, "cards");
-					logger.info("Cards Deleted Successfully");
+					log.info("Cards Deleted Successfully");
 					this.positionService.deleteADocumentByIdAndDecreaseAllPositionsGreaterThanCurrentPosition(
 							kanbanColumn.getIdBoard(), kanbanColumn.getPosition(), kanbanColumn);
-					logger.info("Column Deleted Successfully");
+					log.info("Column Deleted Successfully");
 				}, () -> {
-					logger.error("Column cannot be deleted");
+					log.error("Column cannot be deleted");
 					throw new RuntimeException("Card cannot be deleted");
 				});
 	}
@@ -84,7 +86,7 @@ public class KanbanColumnService {
 	public KanbanColumn updateName(ObjectId id, NameRequest name, UserPrincipal currentUser) {
 		KanbanColumn kanbanColumn = this.findById(id, currentUser);
 		kanbanColumn.setName(name.getName());
-		logger.info("Card Updated Successfully");
+		log.info("Card Updated Successfully");
 		return this.kanbanColumnRepository.save(kanbanColumn);
 	}
 
@@ -105,7 +107,7 @@ public class KanbanColumnService {
 		if (column.getCreatedBy().equalsIgnoreCase(currentUser.getUsername())) {
 			return column;
 		} else {
-			logger.warn("You are not allowed to access the Columns");
+			log.warn("You are not allowed to access the Columns");
 			throw new PermissionErrorException("Columns");
 		}
 	}

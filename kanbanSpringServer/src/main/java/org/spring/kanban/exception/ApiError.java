@@ -9,10 +9,13 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import lombok.Getter;
+
 /**
  * @author Braian
  *
  */
+@Getter
 public class ApiError {
 
 	private HttpStatus httpStatus;
@@ -27,17 +30,4 @@ public class ApiError {
 		this.timestamp = LocalDateTime.now();
 		this.message = message;
 	}
-
-	public HttpStatus getHttpStatus() {
-		return httpStatus;
-	}
-
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
 }

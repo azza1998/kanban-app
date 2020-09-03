@@ -2,24 +2,19 @@ package org.spring.kanban.payload;
 
 import javax.validation.constraints.Size;
 
+import org.bson.types.Binary;
+import org.bson.types.ObjectId;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter
+@AllArgsConstructor
 public class DescriptionRequest {	
 	
 	@Size(max = 2000)
 	private String Description;
-
-	public DescriptionRequest() {
-	}
-
-	public DescriptionRequest(String Description) {
-		this.Description = Description;
-	}
-
-	public String getDescription() {
-		return this.Description;
-	}
-
-	public void setDescription(String Description) {
-		this.Description = Description;
-	}
 
 }
