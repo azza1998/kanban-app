@@ -1,10 +1,6 @@
 package org.spring.kanban.payload;
 
-import java.util.List;
-
 import javax.validation.constraints.NotBlank;
-
-import org.bson.types.ObjectId;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +13,7 @@ import lombok.Setter;
  */
 @Getter @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class LoginRequest {
 	
 	@NotBlank

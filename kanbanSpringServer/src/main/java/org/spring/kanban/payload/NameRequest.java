@@ -14,6 +14,7 @@ import lombok.Setter;
  */
 @Getter @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class NameRequest {
 
 	@NotBlank
