@@ -19,6 +19,7 @@
             <button mat-button (click)="fileInput.click()">Add Avatar</button>
             <input hidden #fileInput type="file" accept=".png, .jpg, .jpeg" name="profileImage" ng2FileSelect
                 [uploader]="uploader">
+            <button mat-button color="warn" (click)="deleteMyAccount(UserProfileDetailResponse.id)">Delete Account</button>
         </mat-card-actions>
     </mat-card>
 </div>

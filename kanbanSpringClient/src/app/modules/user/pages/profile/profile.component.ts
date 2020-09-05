@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
+import { ConfirmDialogRequest } from 'src/app/core/interface/core.interface';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { UserService } from 'src/app/modules/user/shared/user.service';
+import { ConfirmDialogComponent } from 'src/app/shared/component/confirm-dialog/confirm-dialog.component';
 import { FormNameDialogService } from 'src/app/shared/component/form-name-dialog/form-name-dialog.service';
 import { UserProfileDetailResponse } from '../../interface/user.interface';
 import { ChangeEmailDialogService } from '../../shared/change-email-dialog.service';
@@ -26,7 +29,8 @@ export class ProfileComponent implements OnInit {
     private changePasswordDialogService: ChangePasswordDialogService,
     private changeEmailDialogService: ChangeEmailDialogService,
     private formNameDialogService: FormNameDialogService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private router: Router) { }
 
   ngOnInit(): void {
     const maxFileSize5MB = 5 * 1024 * 1024;
@@ -116,6 +120,25 @@ export class ProfileComponent implements OnInit {
       this.userService.findUserProfileByUsername(user.username).subscribe(userProfileDetail => {
         this.UserProfileDetailResponse = userProfileDetail;
       })
+    })
+  }
+
+  deleteMyAccount(id:string){
+    const message = `Your account will be deleted forever, are you sure?`;
+    const dialogData = new ConfirmDialogRequest('Confirm Action', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+    dialogRef.afterClosed().subscribe((result:boolean) => {
+      if(result) {
+        this.userService.deleteAccount(id).subscribe(apiResponse => {
+          this.notificationService.open(apiResponse.message);
+          this.router.navigate(["auth/signin"]);
+        }, error => {
+          this.notificationService.open(error, 'failed');
+        })
+      }
     })
   }
 }

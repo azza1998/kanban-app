@@ -40,4 +40,8 @@ export class UserService {
     return this.httpService.put(`${environment.userEndpoint}/${id}`, nameRequest);
   }
 
+  deleteAccount(id:string):Observable<ApiResponse>{
+    return this.httpService.deleteById(`${environment.userEndpoint}/${id}`);
+  }
+
 }
