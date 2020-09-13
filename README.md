@@ -46,6 +46,7 @@ What things you need to install the software and how install them
 * spring-boot-starter-validation
 * spring-boot-devtools
 * jjwt:0.9.1
+* lombok:1.8.2
 
 ## Features
 
@@ -55,6 +56,8 @@ What things you need to install the software and how install them
 * Move Cards position.
 * Move Card to another column.
 * Upload attachments for your card.
+* To do delombok use this command in folder kanbanSpringServer `mvnw lombok:delombok -Pdlombok`
+  * The output will be `\target\generated-sources\delombok\`
 
 ## Contributing
 
