@@ -45,11 +45,15 @@
                 </mat-list>
                 <!--  end/Cards -->
             </mat-card-content>
-            <mat-card-actions>
+            <mat-card-actions fxLayout="column">
                 <button fxFlex mat-raised-button (click)="saveCard(column.id)">
                     <mat-icon>add_box</mat-icon>
                     <span> Add new Card</span>
                 </button>
+                <span fxLayout="row" class="columns__bottom">
+                    <button fxFlex="50" fxLayoutAlign="center center" mat-raised-button color="warn" (click)="deleteColumn(column.id)">Delete column</button>
+                    <button fxFlex="50" fxLayoutAlign="center center" mat-raised-button (click)="updateColumnName(column.id,column.name)">Update column</button>
+                </span>
             </mat-card-actions>
         </mat-card>
         <!--  end/Columns -->

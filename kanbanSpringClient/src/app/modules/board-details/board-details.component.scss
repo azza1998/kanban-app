@@ -8,6 +8,10 @@
        @extend %word-wrap;
        font-size: 1rem;
     }
+
+    &__bottom {
+        margin-top: 5px;
+    }
 }
 
 .board {  
