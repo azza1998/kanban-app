@@ -12,6 +12,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class DescriptionRequest {	
 	
 	@Size(max = 2000)
