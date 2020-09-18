@@ -1,9 +1,6 @@
 package org.spring.kanban.payload;
 
-import java.util.Set;
-
 import org.bson.types.ObjectId;
-import org.spring.kanban.domain.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

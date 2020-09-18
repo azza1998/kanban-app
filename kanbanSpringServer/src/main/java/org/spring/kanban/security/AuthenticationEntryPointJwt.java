@@ -6,9 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.spring.kanban.exception.CustomGlobalExceptionHandler;
 import org.spring.kanban.exception.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

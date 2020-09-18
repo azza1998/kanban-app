@@ -3,8 +3,6 @@ package org.spring.kanban.service;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spring.kanban.configuration.CustomProjectAggregationOperation;
 import org.spring.kanban.configuration.UserPrincipal;
 import org.spring.kanban.domain.KanbanBoard;

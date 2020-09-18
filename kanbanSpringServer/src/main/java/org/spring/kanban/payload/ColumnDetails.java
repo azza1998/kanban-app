@@ -7,7 +7,6 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**

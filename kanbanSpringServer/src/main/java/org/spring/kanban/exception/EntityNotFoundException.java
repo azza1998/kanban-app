@@ -1,7 +1,6 @@
 package org.spring.kanban.exception;
 
 import lombok.Getter;
-import lombok.Value;
 
 /**
  * @author Braian

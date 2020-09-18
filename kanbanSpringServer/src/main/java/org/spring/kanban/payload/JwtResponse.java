@@ -7,7 +7,6 @@ import org.bson.types.ObjectId;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**

@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-import org.bson.types.ObjectId;
-import org.spring.kanban.payload.CoverDetail;
 import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;

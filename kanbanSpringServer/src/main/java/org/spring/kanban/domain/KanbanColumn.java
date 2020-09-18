@@ -1,7 +1,6 @@
 package org.spring.kanban.domain;
 
 import org.bson.types.ObjectId;
-import org.spring.kanban.payload.CoverDetail;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;

@@ -2,8 +2,6 @@ package org.spring.kanban.security;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spring.kanban.configuration.UserPrincipal;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

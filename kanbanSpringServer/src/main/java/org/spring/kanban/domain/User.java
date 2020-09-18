@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
-import org.spring.kanban.payload.CoverDetail;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

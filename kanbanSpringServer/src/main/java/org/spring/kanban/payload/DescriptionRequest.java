@@ -2,9 +2,6 @@ package org.spring.kanban.payload;
 
 import javax.validation.constraints.Size;
 
-import org.bson.types.Binary;
-import org.bson.types.ObjectId;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

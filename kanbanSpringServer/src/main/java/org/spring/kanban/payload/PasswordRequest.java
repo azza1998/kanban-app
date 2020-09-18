@@ -1,11 +1,7 @@
 package org.spring.kanban.payload;
 
-import java.util.Set;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import org.spring.kanban.domain.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
