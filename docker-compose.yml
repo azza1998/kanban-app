@@ -1,0 +1,35 @@
+version: "3.6"
+services:
+  mongodb:
+    image: mongo
+    ports:
+    - 27017:27017
+    networks:
+    - app-network
+  app:
+    image: braians/kanban-spring-server
+    build:
+      context: ./kanbanSpringServer
+      dockerfile: Dockerfile
+    ports:
+    - 8080:8080
+    environment:
+    - spring.data.mongodb.host=mongodb
+    networks: 
+    - app-network
+    depends_on: 
+    - mongodb
+  app-ui:
+    image: braians/kanban-spring-client
+    build: ./kanbanSpringClient
+    ports:
+    - 4200:80
+    networks:
+    - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+      
+    
