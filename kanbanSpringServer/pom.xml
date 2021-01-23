@@ -10,7 +10,7 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.spring</groupId>
-	<artifactId>kanbanSpringServer</artifactId>
+	<artifactId>kanban-spring-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kanbanSpring</name>
 	<description>kanbanSpringServer Rest Api</description>
