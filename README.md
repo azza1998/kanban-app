@@ -24,6 +24,19 @@ What things you need to install the software and how install them
 
 ![Kanban](assets/kanban.gif)
 
+## Deployment
+
+Instructions how to install **Docker** on [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [Windows](https://docs.docker.com/docker-for-windows/install/), [Mac](https://docs.docker.com/docker-for-mac/install/).
+
+How to run it?
+
+Execute this command in a terminal:
+
+* ```docker-compose build``` - Build the image.
+* ```docker-compose up``` - Starts the containers.
+* ```docker-machine ip default``` - Get docker host ip address.
+* To access use ```http://localhost:4200/``` or ```http://<docker host ip address>:4200/```
+
 ## Built With
 
 ### kanbanSpringClient - Front-End
